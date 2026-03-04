@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <Header />
-      <h2>Welcome to React Jenkins Demo</h2>
+      <h2>Welcome venky</h2>
       <p>This is a sample React application.</p>
     </div>
   );
