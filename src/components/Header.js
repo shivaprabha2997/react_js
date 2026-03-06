@@ -9,6 +9,7 @@ function Header() {
           <h1 className="fs-header__title">shivaprabha  </h1>
           <p className="fs-header__subtitle">Fresh blooms and , delivered with love everyone </p>
         </div>
+    <marque> welocome to shivaprabha's store  </marque>
       </div>
       <nav className="fs-header__nav">
         <a href="#home">Home</a>
