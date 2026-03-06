@@ -1,34 +1,77 @@
 pipeline {
     agent any
-    
+
+    environment {
+        GIT_REPO        = "https://github.com/veeravenkateswararao/react.git"
+        GIT_BRANCH      = "main"
+
+        DOCKERHUB_USER  = "venkyveera"
+        IMAGE_NAME      = "react-app"
+        IMAGE_TAG       = "${BUILD_NUMBER}"
+
+        DOCKER_CREDS    = "Docker_CRED"
+
+        CONTAINER_NAME  = "react-container"
+        HOST_PORT       = "9676"
+        CONTAINER_PORT  = "80"
+    }
+
     stages {
 
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
                 checkout scmGit(
-                    branches: [[name: '*/main']],
-                    extensions: [],
+                    branches: [[name: "*/${GIT_BRANCH}"]],
                     userRemoteConfigs: [[
                         credentialsId: 'venkygit',
-                        url: 'https://github.com/veeravenkateswararao/react.git'
+                        url: "${GIT_REPO}"
                     ]]
                 )
             }
         }
 
-        stage('Docker Build') {
+        stage('Build Docker Image') {
             steps {
-                sh 'docker build -t react-app:${BUILD_NUMBER} .'
+                sh """
+                docker build -t ${DOCKERHUB_USER}/${IMAGE_NAME}:${IMAGE_TAG} .
+                """
             }
         }
 
-        stage('Deploy') {
+        stage('DockerHub Login') {
             steps {
-                sh '''
-                docker stop react-container || true
-                docker rm react-container || true
-                docker run -d -p 9676:80 --name react-container react-app:${BUILD_NUMBER}
-                '''
+                withCredentials([usernamePassword(
+                    credentialsId: "${DOCKER_CREDS}",
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+
+                    sh """
+                    echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin
+                    """
+                }
+            }
+        }
+
+        stage('Push Image to DockerHub') {
+            steps {
+                sh """
+                docker push ${DOCKERHUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}
+                """
+            }
+        }
+
+        stage('Deploy Container') {
+            steps {
+                sh """
+                docker stop ${CONTAINER_NAME} || true
+                docker rm ${CONTAINER_NAME} || true
+
+                docker run -d \
+                -p ${HOST_PORT}:${CONTAINER_PORT} \
+                --name ${CONTAINER_NAME} \
+                ${DOCKERHUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}
+                """
             }
         }
     }
