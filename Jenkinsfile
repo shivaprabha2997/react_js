@@ -20,11 +20,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                checkout scmGit(
-                    git branch: "${GIT_BRANCH}",
-                credentialsId: "shiva_git",
-                url: "${GIT_REPO}"
-                )
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'shiva_git', url: 'https://github.com/shivaprabha2997/react_js.git']])
             }
         }
 
