@@ -12,7 +12,7 @@ pipeline {
         DOCKER_CREDS    = "Docker_CRED"
 
         CONTAINER_NAME  = "react-container"
-        HOST_PORT       = "9000"
+        HOST_PORT       = "9676"
         CONTAINER_PORT  = "80"
     }
 
