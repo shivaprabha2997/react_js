@@ -7,13 +7,13 @@ function Header() {
         <span className="fs-header__logo">🌸</span>
         <div>
           <h1 className="fs-header__title">shivaprabha  </h1>
-          <p className="fs-header__subtitle">Fresh blooms and , delivered with love  everyone </p>
+          <p className="fs-header__subtitle">Fresh blooms and , delivered with love everyone </p>
         </div>
       </div>
       <nav className="fs-header__nav">
         <a href="#home">Home</a>
         <a href="#bouquets">Bouquets</a>
-        <a href="#about">Aboutcjj</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
