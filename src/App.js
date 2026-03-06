@@ -36,7 +36,7 @@ function App() {
         <section id="bouquets" className="fs-section">
           <div className="fs-section__header">
             <h3>Featured bouquets</h3>
-            <p>Hand-picked favorites from Venky&apos;s Flower Studio.</p>
+            <p>Hand-picked favorites from shivaprabha&apos;s Flower Studio.</p>
           </div>
           <div className="fs-grid">
             <article className="fs-card">
