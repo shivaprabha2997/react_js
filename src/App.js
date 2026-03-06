@@ -12,8 +12,8 @@ function App() {
         <section id="home" className="fs-hero">
           <div className="fs-hero__content">
             <p className="fs-pill">New • Spring collection now available</p>
+            <marquee>Welcome to My flowerstore</marquee>
             <h2>Send flowers that speak your heart.</h2>
-    <marquee>Welcome to My Website</marquee>
             <p className="fs-hero__text">
               Curated bouquets, hand-tied by artisans, delivered fresh to your doorstep.
               Perfect for birthdays, anniversaries, or just because.
