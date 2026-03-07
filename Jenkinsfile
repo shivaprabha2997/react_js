@@ -5,11 +5,13 @@ pipeline {
         GIT_REPO        = "https://github.com/shivaprabha2997/react_js.git"
         GIT_BRANCH      = "main"
 
+        DOCKER_CREDS    = "Docker_CRED"
+
         DOCKERHUB_USER  = "shivadocker2997"
         IMAGE_NAME      = "react-app"
         IMAGE_TAG       = "${BUILD_NUMBER}"
 
-        DOCKER_CREDS    = "Docker_CRED"
+       
 
         CONTAINER_NAME  = "react-container"
         HOST_PORT       = "8099"
